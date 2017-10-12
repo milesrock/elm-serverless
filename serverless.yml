@@ -1,0 +1,27 @@
+service: elmServerless
+package:
+  exclude:
+    - secrets.yml
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  secrets: ${file(secrets.yml):${self:custom.stage}}
+
+provider:
+  name: aws
+  stage: ${opt:stage, 'dev'}
+  runtime: nodejs6.10
+  region: eu-west-2
+  profile: default
+  environment:
+    GLOBAL_VAR:"${self:custom.secrets.GLOBAL_VAR}"
+    ENV_DEPENDENT_VAR:"${self:custom.secrets.ENV_DEPENDENT_VAR}"
+
+functions:
+  hello:
+    handler: app/handler.hello
+    events:
+      - http:
+          path: hello
+          method: post
+          cors: true

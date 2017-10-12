@@ -1,0 +1,11 @@
+{
+  "name": "elm-serverless",
+  "version": "1.0.0",
+  "description": "A boilerplate to run a elm worker in a AWS Lambda, deployed with serverless.",
+  "main": "index.js",
+  "author": "Guillaume BOUDON <guillaumeboudon@gmail.com>",
+  "license": "BSD-3-Clause",
+  "scripts": {
+    "invoke": "rm ./app/elmMain.js 2> /dev/null && elm make ./app/ElmMain.elm --output ./app/elmMain.js && serverless invoke local -v --function hello --stage dev --path test/data.json"
+  }
+}

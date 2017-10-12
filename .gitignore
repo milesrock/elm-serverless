@@ -1,0 +1,9 @@
+.git/
+.serverless/
+node_modules/
+jspm_packages/
+elm-stuff/
+
+secrets.yml
+
+app/elmMain.js
